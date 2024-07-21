@@ -48,15 +48,17 @@ float RoutePlanner::CalculateHValue(RouteModel::Node const *node) {
 
 void RoutePlanner::AddNeighbors(RouteModel::Node *current_node) {
 
+    // Instruction hint
     current_node->FindNeighbors();
 
+    // Instruction hint
     for (RouteModel::Node* neighbor_node : current_node->neighbors)
     {
         neighbor_node->parent  = current_node;
-        neighbor_node->g_value = current_node->g_value + current_node->distance(*neighbor_node); // Value from start node to given node
+        neighbor_node->g_value = current_node->g_value + current_node->distance(*neighbor_node); // Value from start node to given node as simple A* board
         neighbor_node->h_value = CalculateHValue(neighbor_node);
         neighbor_node->visited = true;
-
+        // In the examples usage of emplace
         open_list.emplace_back(neighbor_node);
     }
 }
@@ -68,16 +70,21 @@ void RoutePlanner::AddNeighbors(RouteModel::Node *current_node) {
 // - Create a pointer to the node in the list with the lowest sum.
 // - Remove that node from the open_list.
 // - Return the pointer.
+
+
 bool Compare(RouteModel::Node *node2, RouteModel::Node *node1)
 {
+    // Same as previous project of simple A* board
     return (node1->g_value + node1->h_value) > (node2->g_value + node2->h_value);
 }
 
 RouteModel::Node *RoutePlanner::NextNode() {
 
-    // Copy over from previous project  of simple A* board
+    // Googled .begin() .end() usage from std::vector
     std::sort(open_list.begin(),open_list.end(), Compare);
+    // Get first element
     RouteModel::Node *lowest_sum = open_list[0];
+    // Googled how to remove first element as there is no pop_front for std::vector
     open_list.erase(open_list.begin());
     return lowest_sum;
 }
@@ -99,7 +106,9 @@ std::vector<RouteModel::Node> RoutePlanner::ConstructFinalPath(RouteModel::Node 
     // TODO: Implement your solution here.
     while (current_node->parent != nullptr)
     {
+        // Update distance from current node to parent node
         distance += current_node->distance(*current_node->parent);
+        // Googled insert as there is no push_front for std::vector
         path_found.insert(path_found.begin(), *current_node);
         current_node = current_node->parent;
     }
@@ -122,13 +131,21 @@ void RoutePlanner::AStarSearch() {
     RouteModel::Node *current_node = nullptr;
 
     // TODO: Implement your solution here.
+
+    // Struggled with start_node, didnt occur immediately to put in open_list first
     start_node->visited = true;
     open_list.push_back(start_node);
+
+    // Iterate until all viable nodes explored
     while(!open_list.empty())
     {
+        // Get lowest_sum Node
         current_node = NextNode();
+
+        // Get new neighbors of current node
         AddNeighbors(current_node);
         
+        // Check goal
         if (current_node->distance(*end_node) == 0)
         {
             m_Model.path = ConstructFinalPath(current_node);
