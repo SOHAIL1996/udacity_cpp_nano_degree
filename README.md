@@ -13,7 +13,7 @@ Project Collection for Udactiy Cpp Nano Degree.
 ## Projects
 
 - [X] A* Board
-- [ ] OpenStreetMap Route Planner
+- [X] OpenStreetMap Route Planner
 - [ ] System Monitor
 - [ ] Memory Management Chatbot
 - [ ] Concurrent Traffic Simulation
