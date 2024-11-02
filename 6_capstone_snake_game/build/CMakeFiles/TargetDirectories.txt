@@ -1,0 +1,3 @@
+/home/administrator/sohail1996/capstone_snake_game/build/CMakeFiles/SnakeGame.dir
+/home/administrator/sohail1996/capstone_snake_game/build/CMakeFiles/edit_cache.dir
+/home/administrator/sohail1996/capstone_snake_game/build/CMakeFiles/rebuild_cache.dir
