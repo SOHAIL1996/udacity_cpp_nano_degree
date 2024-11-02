@@ -9,12 +9,13 @@ Archive for completed projects.
 
 Project Collection for Udactiy Cpp Nano Degree.
 
+![Nano Degree CPP](assets/udacity_cpp_nano_degree.png)
 
 ## Projects
 
 - [X] A* Board
 - [X] OpenStreetMap Route Planner
-- [ ] System Monitor
-- [ ] Memory Management Chatbot
-- [ ] Concurrent Traffic Simulation
-- [ ] Capstone Project
+- [X] System Monitor
+- [X] Memory Management Chatbot
+- [X] Concurrent Traffic Simulation
+- [X] Capstone Project
